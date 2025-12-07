@@ -1,11 +1,12 @@
 # AI-Beginner-Projects
 
 
-- [Simple AI Agent]
+- [Simple AI Agent](./ai_agent/README.md)
+    - `langchain`
 
-- [AI Resume Critiquer]
+- [AI Resume Critiquer](./ai_resume_critiquer/README.md)
 
-- [AI Image Classifier]
+- [AI Image Classifier](./ai_image_classifier/README.md)
 
 
 - Open AI API LLM

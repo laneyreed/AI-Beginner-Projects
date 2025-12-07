@@ -24,7 +24,7 @@
 
 
 
-- making a simple tool that the agent can use so that it can do something beyond just a simple response
+- a simple tool that the agent can use so that it can do something beyond just a simple response
 - we can make any kind of tool such as a tool to call a API
 - calculator
 
