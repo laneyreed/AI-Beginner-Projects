@@ -1,5 +1,5 @@
 from langchain_core.messages import HumanMessage
-from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI # this is the LLM model
 from langchain.tools import tool
 from langchain.agents import create_agent
 
