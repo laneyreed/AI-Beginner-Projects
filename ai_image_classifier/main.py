@@ -1,12 +1,12 @@
 import cv2
-import numpy as np # comes with tensorflow by default
+import numpy as np 
 import streamlit as st
 from tensorflow.keras.applications.mobilenet_v2 import (
     MobileNetV2,
     preprocess_input,
     decode_predictions
 )
-from PIL import Image # come with cv2 by default
+from PIL import Image 
 
 def load_model():
     model = MobileNetV2(weights="imagenet")
@@ -19,26 +19,48 @@ def preprocess_image(image):
     img = np.expand_dims(img, axis=0)
     return img
 
-#===========================================================================================================
-# TODO 2-5: Classify Image and Decode Predictions
-# pass the model a image
-# then it gives us back predictions, which is and array of numeric values, [0.34, 0.1, 0.56, ...]
-# each value represent a percentage confidence score for each class that the model can predict
-# the index of each value corresponds to a specific class label, such as "cat", "dog", "car", etc.
-# this means that [0.34, 0.1, 0.56, ...] could mean that 
-# the model is 34% confident that the image is a "cat", 10% confident it's a "dog", and 56% confident it's a "car" etc...
-# the index of the highest value in the array corresponds to the class that the model thinks the image belongs to
-# decode_predictions() function takes these numeric predictions and converts them into human-readable labels
-#===========================================================================================================
 def classify_image(model, image):
     try:
         processed_image = preprocess_image(image)
         predictions = model.predict(processed_image)
-
-        # takes the numeric prdiction that are genrated by the model and converts them into human-readable labels
-        decoded_predictions = decode_predictions(predictions, top=3)[0]# takes the top 3 predictions, ones with the highest confidence scores
+        decoded_predictions = decode_predictions(predictions, top=3)[0]
         
         return decoded_predictions
     except Exception as e:
         st.error(f"Error classifying image: {str(e)}")
         return None
+    
+
+def main():
+    st.set_page_config(page_title="AI Image Classifier", page_icon="🖼️", layout="centered")
+    
+    st.title("AI Image Classifier")
+    st.write("Upload an image and let AI tell you what is in it!")
+    
+    @st.cache_resource
+    def load_cached_model():
+        return load_model()
+    
+    model = load_cached_model()
+    
+    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png"])
+    
+    if uploaded_file is not None:
+        image = st.image(
+            uploaded_file, caption="Uploaded Image", use_container_width=True
+        )
+        btn = st.button("Classify Image")
+        
+        if btn:
+            with st.spinner("Analyzing Image..."):
+                image = Image.open(uploaded_file)
+                predictions = classify_image(model, image)
+                
+                if predictions:
+                    st.subheader("Predictions")
+                    for _, label, score in predictions:
+                        st.write(f"**{label}**: {score:.2%}")
+                        
+                        
+if __name__ == "__main__":
+    main()
