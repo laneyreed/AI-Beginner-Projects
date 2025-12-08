@@ -6,13 +6,14 @@
 - A AI Agent is a chatbot that can perform tasks using tools and language models
 
 ---
-
+**Basic AI Agent setup with a tool**
 **This program will ask the user for some input then send the input to the agent. When the response comes back from the agent, it is streammed out and printed to the console**
 - created with `uv`: `uv init .`
 - installed `uv add langgraph langchain python-dotenv langchain-openai`
 - Open AI API Key from: https://platform.openai.com/api-keys
     - https://platform.openai.com/docs/api-reference/introduction
 - has a simple tool that the agent can use so that it can do something beyond just a simple response
+    - you can create tools(python functions) and pass them to the agent and have them do something
 
 #### 
 - `langchain`: high level framework that allows us to build AI Applications
