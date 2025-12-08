@@ -2,9 +2,13 @@
 
 
 - [Simple AI Agent](./ai_agent/README.md)
-    - `langchain`
+    - uses langchain to create an AI agent that can perform calculations and chat with the user
+    - uses ChatOpenAI model from langchain_openai module and defines a simple calculator tool
 
 - [AI Resume Critiquer](./ai_resume_critiquer/README.md)
+    - allows users to upload their resumes and get AI-generated critiques
+    - using the OpenAI GPT-4o-mini model from the openai module
+    - Streamlit is used to create the web interface
 
 - [AI Image Classifier](./ai_image_classifier/README.md)
 
